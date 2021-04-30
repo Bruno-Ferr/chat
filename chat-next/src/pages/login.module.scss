@@ -1,0 +1,63 @@
+.container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--blue);
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        img {
+            height: 80%;
+        }
+    }
+
+    .infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+        > h2 {
+            font-size: 2.7rem;
+            margin-bottom: 6.4rem;
+
+            svg {
+                transform: rotateY(180deg);
+                margin-right: .7rem;
+            }
+        }   
+
+        h4 {
+            font-size: 2.2rem;
+            margin-bottom:  1.6rem;
+        }
+
+        .googleDescription {
+            background: none;
+            border-radius: 50px;
+            padding: .5rem .75rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.6rem;
+
+            svg {
+                width: 2.6rem;
+                height: 2.6rem;
+            }
+
+            p {
+                font-weight: semi-bold;
+                font-size: 1.3rem;
+                line-height: 2rem;
+                width: 15rem;
+                margin-left: 1.6rem;
+            }
+
+        }
+
+    }
+}
