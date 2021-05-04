@@ -24,6 +24,7 @@
     .chatBody {
         height: calc(100vh - 4.5rem - 4.5rem);
         padding: 1rem 1.8rem 0 1.8rem;
+        background: url('../../../public/Wallpaper.svg');
         overflow-y: scroll;
         
         &::-webkit-scrollbar-track {
@@ -39,11 +40,15 @@
             background: #dad7d7;
         }
 
+        ul {
+            list-style: none;
+        }
+
         p {
             position: relative;
             padding: 0.625rem;
             margin-bottom: 30px;
-            background: #ff5555;
+            background: #FFF7AC;
             font-size: 1rem;
             width: fit-content;
             border-radius: 10px 10px 10px 0;
@@ -57,7 +62,7 @@
         .myMessage {
             margin-left: auto;
             border-radius: 10px 10px 0 10px;
-            background: #f4ff55;
+            background: #90DFE4;
             display: flex;
             
             svg {
@@ -66,6 +71,48 @@
                 height: 20px;
             }
             
+        }
+    }
+    
+    .chatFooter {
+        background: #ececec;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        textarea {
+            width: 34rem;
+            border: 0;
+            border-radius: 100px;
+            padding: 1rem;
+            height: 3rem;
+            overflow-y: scroll;
+            outline: none;
+            resize: none;
+            
+            &::-webkit-scrollbar-track {
+                background-color: #F4F4F4;
+            }
+        
+            &::-webkit-scrollbar {
+                width: 6px;
+                background: #F4F4F4;
+            }
+        
+            &::-webkit-scrollbar-thumb {
+                background: #dad7d7;
+            }
+        }
+    
+        button {
+            margin-left: 2rem;
+            background: none;
+            border: 0;
+    
+            svg {
+                width: 25px;
+                height: 25px;
+            }
         }
     }
 }

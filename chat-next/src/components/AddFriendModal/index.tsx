@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { BiCheckCircle } from 'react-icons/bi';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../contexts/UserContext';
 
 interface AddFriendModalProps {
   onRequestClose: () => void;

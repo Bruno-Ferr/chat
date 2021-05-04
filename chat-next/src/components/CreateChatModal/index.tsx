@@ -4,7 +4,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 import styles from './styles.module.scss';
 import { BiCheckCircle, BiXCircle } from 'react-icons/bi';
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../services/api';
 
 interface CreateChatModalProps {

@@ -1,0 +1,12 @@
+.background {
+  // background: url('../../../public/Background.svg');
+  // background-size: cover;
+  // background-position: bottom;
+
+  .container {
+    max-width: 1300px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 0 auto;
+  }
+}

@@ -17,7 +17,6 @@
     }
 
     .sidebarChat {
-        padding: 2rem 1rem 0 1rem;
         display: flex;
         
         transition: .2s;
@@ -27,6 +26,7 @@
         }
 
         a {
+            padding: 2rem 1rem 0 1rem;
             display: flex;
             width: 100%;
             cursor: pointer;

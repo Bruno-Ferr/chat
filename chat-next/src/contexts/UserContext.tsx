@@ -1,7 +1,6 @@
 import { getSession } from 'next-auth/client';
-import { useRouter } from 'next/dist/client/router';
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { api } from './services/api';
+import { api } from '../services/api';
 
 interface UserProps {
   Id: string;
@@ -18,7 +17,6 @@ export const UserContext = createContext<UserProps>({} as UserProps);
 
 export function UserProvider({ children }: UserProviderProps) {
   const [User, setUser] = useState<UserProps>({} as UserProps);
-  const router = useRouter();
 
   useEffect(() => {
     getSession().then((res) => {
@@ -31,8 +29,6 @@ export function UserProvider({ children }: UserProviderProps) {
             Image: res.user.image
           })
         })
-      } else {
-        router.push('/login');
       }
     }); 
   }, [])

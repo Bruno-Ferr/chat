@@ -1,6 +1,6 @@
 import { signOut } from 'next-auth/client';
 import React, { useContext, useState } from 'react';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../contexts/UserContext';
 
 
 import { GrLogout } from 'react-icons/gr';
