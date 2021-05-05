@@ -14,11 +14,10 @@ const io = new Server(http, {
   }
 });
 
-
 io.on("connection", (socket: Socket) => {
-
-})
-
+  const id = socket.handshake.query.id;
+  socket.join(id);
+});
 
 app.use(cors());
 app.use(express.json());

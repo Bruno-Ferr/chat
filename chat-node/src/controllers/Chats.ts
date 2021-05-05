@@ -15,6 +15,29 @@ class ChatsController {
     return res.json(chats);
   }
 
+  
+  async getChatsUsers(req: Request, res: Response) {
+    const { id, chatId } = req.query;
+    
+    const chatsServices = new ChatsServices();
+
+    const chatsUsers = await chatsServices.getChatsUsers(id, chatId);
+
+    return res.json(chatsUsers);
+  }
+
+
+  async getAllChatsLastMessage(req: Request, res: Response) {
+    const { userId } = req.params
+    
+    const chatsServices = new ChatsServices();
+
+    const allChats = await chatsServices.getAllChatsLastMessage(userId);
+
+    return res.json(allChats)
+  }
+
+
   async createChat(req: Request, res: Response) {
     const chatId = uuid();
 

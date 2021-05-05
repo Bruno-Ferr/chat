@@ -27,4 +27,12 @@ async function getLastMessages(req: Request, res: Response) {
   return res.json(lastMessages)
 }
 
-export { saveMessages, getLastMessages };
+async function getMessages(req: Request, res: Response) {
+  const { chatId } = req.params;
+
+  const Messages = await knex('messages').where('chatId', chatId)
+
+  return res.json(Messages)
+}
+
+export { saveMessages, getLastMessages, getMessages };
