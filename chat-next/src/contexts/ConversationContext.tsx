@@ -36,12 +36,17 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
   const user = useContext(UserContext);
   const [chatUsers, setChatUsers] = useState({} as chatUsers);
 
-  
+  const socket = io('http://localhost:3333', { query: { id: user.Id } });
+
+  useEffect(() => {
+    socket.on('receive-message', params => {
+      setMessages([...messages, { author: params.author, chatId: params.chatId, messageBody: params.text, sendedAt: new Date() }])
+    });
+  }, [messages])
 
   function sendMessage(text) {
-    const socket =io('http://localhost:3333', { query: { id: user.Id } });
-    
-    socket.emit("send-message", ({chatUsers: chatUsers.chatId, text}))
+    socket.emit("send-message", ({chatUsers: chatUsers.chatId, text, userId: user.Id}));
+    setMessages([...messages, { author: user.Id, chatId: chatUsers.chatId, messageBody: text, sendedAt: new Date() }]);
   }
 
   useEffect(() => {

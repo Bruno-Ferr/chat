@@ -15,8 +15,10 @@ export function Chats() {
   
 
   function handleSendMessage() {
-    sendMessage(text) 
-    setText('')
+    if(text !== '') {
+      sendMessage(text) 
+      setText('')
+    }
   }
   
 
@@ -29,10 +31,10 @@ export function Chats() {
       <div className={styles.chatBody}>
         <ul>
 
-          {messages.map(message => {
+          {messages.map((message,  index) => {
             return message.author === user.Id ? 
             (
-              <li key={message.Id}>
+              <li key={index}>
                 <p className={styles.myMessage}>
                   {message.messageBody}
                   <time>12:32</time>
@@ -40,7 +42,7 @@ export function Chats() {
                 </p>
               </li>
             ) : (
-              <li key={message.Id}>
+              <li key={index}>
                 <p>
                   {message.messageBody}
                   <time>12:32</time>
@@ -53,7 +55,7 @@ export function Chats() {
       </div>
       <div className={styles.chatFooter}>
         <textarea name="message" required placeholder="Digite uma mensagem" value={text} onChange={((event) => setText(event.target.value))} />
-        <button type="button" onClick={() => handleSendMessage()}>
+        <button type="button" onClick={(() => handleSendMessage())}>
           <IoMdSend color="#919191" />
         </button>
       </div>
