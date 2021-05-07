@@ -20,6 +20,7 @@ interface messages {
   author: string;
   messageBody: string;
   sendedAt: string;
+  seen: boolean;
 }
 
 interface ConversationContextProps {
@@ -43,15 +44,29 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
   
   useEffect(() => {
     socket.on('receive-message', params => {
-      setMessages([...messages, { 
-        author: params.author, 
-        chatId: params.chatId, 
-        messageBody: params.text, 
-        sendedAt: format(new Date(), 'HH mm', { locale: ptBR })
-        }
-      ]);
+      setMessages([...messages])
+      if(params.chatId === selectedConversation) {
+        setMessages([...messages, { 
+          author: params.author, 
+          chatId: params.chatId, 
+          messageBody: params.text, 
+          sendedAt: format(new Date(), 'HH mm', { locale: ptBR }),
+          seen: false
+          }
+        ]);
+      }
     });
   }, [messages]);
+
+  // useEffect(() => {
+  //   if(messages[0] != undefined){
+  //       if(messages[messages.length - 1].author !== user.Id) {
+  //         if(messages[messages.length - 1].seen === false) {
+  //           socket.emit("saw-message", ({ chatId: chatUsers.chatId, userId: messages[messages.length - 1].author }))
+  //         }
+  //       }
+  //   }
+  // }, [messages, selectedConversation])
 
 
   function sendMessage(text) {
@@ -60,10 +75,12 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
       author: user.Id, 
       chatId: chatUsers.chatId, 
       messageBody: text, 
-      sendedAt: format(new Date(), "HH mm", { locale: ptBR })
+      sendedAt: format(new Date(), "HH mm", { locale: ptBR }),
+      seen: false
       }
     ]);
   }
+  
 
 
   useEffect(() => {
@@ -74,7 +91,9 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
             ...message,
             sendedAt: format(new Date(message.sendedAt), "HH mm", {
             locale: ptBR
-          })}
+            }),
+            seen: message.seen === 0 ? false : true
+          }
         });
 
         setMessages(formattedMessages);

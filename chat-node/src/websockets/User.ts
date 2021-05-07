@@ -26,5 +26,12 @@ io.on("connect", (socket) => {
     recipients.forEach(recipient => {
       socket.broadcast.to(recipient.userId).emit('receive-message', params)
     })
+  });
+
+  socket.on("saw-message", async({ chatId, userId }) => {
+    // Salvar a alteração no banco
+    await knex('messages').where('chatId', chatId).update('seen', 1)
+
+    socket.broadcast.to(userId).emit("seen-message");
   })
 });

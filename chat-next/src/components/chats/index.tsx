@@ -32,18 +32,29 @@ export function Chats() {
         <ul>
 
           {messages.map((message,  index) => {
-            return message.author === user.Id ? 
-            (
-              <li key={index}>
-                <div className={styles.myMessage}>
-                  <p>
-                    {message.messageBody}
-                  </p>
-                  <time>{message.sendedAt}</time>
-                  <BiCheckDouble color="#f0f0f0"/>
-                </div>
-              </li>
-            ) : (
+            return message.author === user.Id ? (
+              message.seen === false ? (
+                <li key={index}>
+                  <div className={styles.myMessage}>
+                    <p>
+                      {message.messageBody}
+                    </p>
+                    <time>{message.sendedAt}</time>
+                    <BiCheckDouble color="#f0f0f0"/>
+                  </div>
+                </li>
+              ): (
+                <li key={index}>
+                  <div className={styles.myMessage}>
+                    <p>
+                      {message.messageBody}
+                    </p>
+                    <time>{message.sendedAt}</time>
+                    <BiCheckDouble color="#0b8500"/>
+                  </div>
+                </li>
+              ) 
+              ) : (
               <li key={index}>
                 <div>
                   <p>
