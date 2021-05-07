@@ -28,7 +28,7 @@ class ChatsServices {
       unordered_all_chats[i] =  {message, chatName}
     }
 
-    const all_chats = unordered_all_chats
+    const all_chats = unordered_all_chats.sort((a, b) => b.message.sendedAt - a.message.sendedAt);
     
     return all_chats;
   }

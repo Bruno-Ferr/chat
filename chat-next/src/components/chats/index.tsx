@@ -35,18 +35,22 @@ export function Chats() {
             return message.author === user.Id ? 
             (
               <li key={index}>
-                <p className={styles.myMessage}>
-                  {message.messageBody}
-                  <time>12:32</time>
-                  <BiCheckDouble color="#b6b6b6"/>
-                </p>
+                <div className={styles.myMessage}>
+                  <p>
+                    {message.messageBody}
+                  </p>
+                  <time>{message.sendedAt}</time>
+                  <BiCheckDouble color="#f0f0f0"/>
+                </div>
               </li>
             ) : (
               <li key={index}>
-                <p>
-                  {message.messageBody}
-                  <time>12:32</time>
-                </p>
+                <div>
+                  <p>
+                    {message.messageBody}
+                  </p>
+                  <time>{message.sendedAt}</time>
+                </div>
               </li>
             )
           })}
@@ -55,7 +59,7 @@ export function Chats() {
       </div>
       <div className={styles.chatFooter}>
         <textarea name="message" required placeholder="Digite uma mensagem" value={text} onChange={((event) => setText(event.target.value))} />
-        <button type="button" onClick={(() => handleSendMessage())}>
+        <button type="submit" onClick={(() => handleSendMessage())}>
           <IoMdSend color="#919191" />
         </button>
       </div>

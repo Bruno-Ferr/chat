@@ -2,6 +2,8 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { api } from "../services/api";
 import io from 'socket.io-client';
 import { UserContext } from "./UserContext";
+import { format } from 'date-fns';
+import ptBR from "date-fns/locale/pt-BR";
 
 interface ConversationProviderProps {
   children: ReactNode
@@ -38,27 +40,51 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
 
   const socket = io('http://localhost:3333', { query: { id: user.Id } });
 
+  
   useEffect(() => {
     socket.on('receive-message', params => {
-      setMessages([...messages, { author: params.author, chatId: params.chatId, messageBody: params.text, sendedAt: new Date() }])
+      setMessages([...messages, { 
+        author: params.author, 
+        chatId: params.chatId, 
+        messageBody: params.text, 
+        sendedAt: format(new Date(), 'HH mm', { locale: ptBR })
+        }
+      ]);
     });
-  }, [messages])
+  }, [messages]);
+
 
   function sendMessage(text) {
     socket.emit("send-message", ({chatUsers: chatUsers.chatId, text, userId: user.Id}));
-    setMessages([...messages, { author: user.Id, chatId: chatUsers.chatId, messageBody: text, sendedAt: new Date() }]);
+    setMessages([...messages, { 
+      author: user.Id, 
+      chatId: chatUsers.chatId, 
+      messageBody: text, 
+      sendedAt: format(new Date(), "HH mm", { locale: ptBR })
+      }
+    ]);
   }
+
 
   useEffect(() => {
     if(selectedConversation) {
       api.get(`/getMessages/${selectedConversation}`).then(res => {
-        setMessages(res.data);
+        const formattedMessages = res.data.map(message => {
+          return {
+            ...message,
+            sendedAt: format(new Date(message.sendedAt), "HH mm", {
+            locale: ptBR
+          })}
+        });
+
+        setMessages(formattedMessages);
       });
       api.get('/chatUsers', {params: {id: user.Id, chatId: selectedConversation}}).then(res => {
         setChatUsers(res.data[0]);
       })
     }
   }, [selectedConversation]);
+
 
   return (
     <ConversationContext.Provider value={{ chatUsers, messages, selectedConversation, setSelectedConversation, sendMessage }}>

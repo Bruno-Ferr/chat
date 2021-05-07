@@ -14,7 +14,7 @@ routes.get('/usersLogIn/:email', createUserOnLogIn);
 routes.get('/users/:email', getUser);
 
 routes.get('/chats/:id', chatsController.getChats);
-routes.get('/getAllChatsLast/:userId', chatsController.getAllChatsLastMessage);
+routes.get('/getAllChatsLastMessages/:userId', chatsController.getAllChatsLastMessage);
 routes.get('/chatUsers', chatsController.getChatsUsers)
 routes.post('/chats', chatsController.createChat);
 

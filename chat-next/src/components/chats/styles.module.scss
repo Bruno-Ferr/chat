@@ -44,31 +44,36 @@
             list-style: none;
         }
 
-        p {
-            position: relative;
-            padding: 0.625rem;
+        div {
+            display: flex;
             margin-bottom: 30px;
             background: #FFF7AC;
             font-size: 1rem;
             width: fit-content;
             border-radius: 10px 10px 10px 0;
+            
+            p {
+                padding: 0.687rem;
+            }
 
             time {
-                margin-left: 10px;
-                font-size: .6rem;
+                margin: auto .5rem 5px 1rem;
+                font-size: .55rem;
             }
         }
+
+        
 
         .myMessage {
             margin-left: auto;
             border-radius: 10px 10px 0 10px;
             background: #90DFE4;
-            display: flex;
+            
             
             svg {
-                margin-left: 3px;
-                width: 20px;
-                height: 20px;
+                margin: auto .4rem 3px 0;
+                width: 17px;
+                height: 17px;
             }
             
         }

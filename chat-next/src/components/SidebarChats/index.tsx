@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { api } from '../../services/api';
-import { socket } from '../../services/socket';
 import { UserContext } from '../../contexts/UserContext';
 import { ConversationContext } from '../../contexts/ConversationContext';
 import styles from './styles.module.scss';
@@ -21,15 +20,15 @@ interface AllChatsMessagesProps {
 
 export function SidebarChats() {
     const [allChats, setAllChats] = useState<AllChatsProps[]>([]);
-    const { selectedConversation, setSelectedConversation } = useContext(ConversationContext);
+    const { messages, setSelectedConversation } = useContext(ConversationContext);
     
     const user = useContext(UserContext);
     
     useEffect(() => {
-        api.get(`/getAllChatsLast/${user.Id}`).then(res => {
+        api.get(`/getAllChatsLastMessages/${user.Id}`).then(res => {
             setAllChats(res.data);
         })
-    }, [user]);
+    }, [user, messages]);
 
     return( 
         <ul className={styles.sidebarChats}>
