@@ -14,7 +14,7 @@ const io = new Server(http, {
   }
 });
 
-io.on("connection", (socket: Socket) => {
+io.once("connection", (socket: Socket) => {
   
 });
 

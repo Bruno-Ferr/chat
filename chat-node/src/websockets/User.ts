@@ -30,8 +30,8 @@ io.on("connect", (socket) => {
 
   socket.on("saw-message", async({ chatId, userId }) => {
     // Salvar a alteração no banco
-    await knex('messages').where('chatId', chatId).update('seen', 1)
+    await knex('messages').where('chatId', chatId).update('seen', true);
 
-    socket.broadcast.to(userId).emit("seen-message");
+    socket.broadcast.to(userId).emit("seen-message", ({ chatId }));
   })
 });

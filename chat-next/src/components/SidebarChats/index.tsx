@@ -20,7 +20,7 @@ interface AllChatsMessagesProps {
 
 export function SidebarChats() {
     const [allChats, setAllChats] = useState<AllChatsProps[]>([]);
-    const { messages, setSelectedConversation } = useContext(ConversationContext);
+    const { messages, sawMessage } = useContext(ConversationContext);
     
     const user = useContext(UserContext);
     
@@ -35,7 +35,7 @@ export function SidebarChats() {
             {allChats.map(chat => {
                 return (
                     <li key={chat.message.Id} className={styles.sidebarChat}>
-                        <a onClick={() => setSelectedConversation(chat.message.chatId) }>
+                        <a onClick={() => sawMessage(chat.message.chatId) }>
                             <img src='' alt=""/>
                             <div>
                                 <h4>{chat.chatName}</h4>

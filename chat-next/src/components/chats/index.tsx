@@ -20,7 +20,6 @@ export function Chats() {
       setText('')
     }
   }
-  
 
   return (
     <main className={styles.chat}>

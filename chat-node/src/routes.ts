@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { ChatsController } from './controllers/Chats';
 import { addFriend, getFriends } from './controllers/Friends';
-import { getLastMessages, saveMessages, getMessages, updateSeen } from './controllers/Messages';
+import { getLastMessages, saveMessages, getMessages } from './controllers/Messages';
 
 import { createUserOnLogIn, getUser } from './controllers/User';
 

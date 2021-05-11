@@ -35,12 +35,4 @@ async function getMessages(req: Request, res: Response) {
   return res.json(Messages)
 }
 
-async function updateSeen(req: Request, res: Response) {
-  const { chatId } = req.params;
-
-  await knex('messages').where('chatId', chatId).update('seen', true)
-
-  return res.json()
-}
-
-export { saveMessages, getLastMessages, getMessages, updateSeen };
+export { saveMessages, getLastMessages, getMessages};
