@@ -38,8 +38,9 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
   const [messages, setMessages] = useState([]);
   const user = useContext(UserContext);
   const [chatUsers, setChatUsers] = useState<chatUsers>({} as chatUsers);
+  const socket = io('http://localhost:3333', { query: { id: user.Id } });
 
-  const socket = io('http://localhost:3333', { query: { id: user.Id } })
+  
 
   useEffect(() => {
     if(selectedConversation) {
@@ -57,15 +58,12 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
             seen: message.seen === 0 ? false : true
           }
         });
-
         setMessages(formattedMessages);
       });
-
     }
   }, [selectedConversation]);
+
   
-
-
   useEffect(() => {
     socket.on('receive-message', params => {
       if(params.chatId === selectedConversation) {
@@ -82,22 +80,37 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
       }
       socket.close();
     });
-
+    
   }, [messages]);
 
-  async function sawMessage(chatId) {
-    await setSelectedConversation(chatId);
+
+  function sendMessage(text) {
+    socket.emit("send-message", ({chatUsers: chatUsers.chatId, text, userId: user.Id}));
+    
+    setMessages([...messages, { 
+      author: user.Id, 
+      chatId: chatUsers.chatId, 
+      messageBody: text, 
+      sendedAt: format(new Date(), "HH mm", { locale: ptBR }),
+      seen: false
+      }
+    ]); 
+  }
+
+  function sawMessage(chatId) {
+    setSelectedConversation(chatId);
 
     if(messages[0] !== undefined){
       if(messages[messages.length - 1].author !== user.Id) {
         socket.emit("saw-message", ({ chatId, userId: messages[messages.length - 1].author }));
       }
     }
-    
   }
+
 
   useEffect(() => {
     socket.on('seen-message', () => {
+      console.log('oi')
       const isSeen = messages.map(message => {
         return {
           ...message,
@@ -109,18 +122,6 @@ export function ConversationProvider({ children }: ConversationProviderProps) {
     });
 
   }, [messages]);
-
-  function sendMessage(text) {
-    socket.emit("send-message", ({chatUsers: chatUsers.chatId, text, userId: user.Id}));
-    setMessages([...messages, { 
-      author: user.Id, 
-      chatId: chatUsers.chatId, 
-      messageBody: text, 
-      sendedAt: format(new Date(), "HH mm", { locale: ptBR }),
-      seen: false
-      }
-    ]);
-  }
 
 
   return (

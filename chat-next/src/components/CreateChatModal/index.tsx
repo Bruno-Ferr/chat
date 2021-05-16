@@ -30,10 +30,11 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
   }, []);
 
   const [allFriends, setAllFriends] = useState<friend[]>([]);
-  const [selectedFriend, setSelectedFriend] = useState([]);
+  const [selectedFriend, setSelectedFriend] = useState([user.Email]);
 
   const [searchFriends, setSearchFriends] = useState<friend[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [chatName, setChatName] = useState('');
 
   function handleChange(e) {
     setInputValue(e.target.value);
@@ -48,9 +49,6 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
     }
   }, [inputValue])
 
-
-  
-
   function handleSelectFriend(Email) {
     setSelectedFriend([...selectedFriend, Email]);
   }
@@ -61,9 +59,10 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
   }
 
 
+  function handleCreateChat() {
+    api.post('/chats', {data: {selectedFriend, chatName} })
 
-  function handleCreateChat(friendEmail) {
-
+    onRequestClose()
   }
 
   return (
@@ -112,7 +111,10 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
             }
           })}   
         </ul>
-        <button type="button" onClick={() => handleCreateChat(selectedFriend)} className={styles.createNewChat}>
+        <div className={styles.chatName}>
+          <input type="text" name="chatName" placeholder="Nome do chat" onChange={((event) => setChatName(event.target.value))} />
+        </div>
+        <button type="button" onClick={() => handleCreateChat()} className={styles.createNewChat} disabled={selectedFriend.length <= 1}>
           <p>Create new chat</p>
         </button>
         {/* Array de objetos(amigos), A busca é por email, selecionando e armazenando todos participantes do chat */}

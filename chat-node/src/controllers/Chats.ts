@@ -41,14 +41,12 @@ class ChatsController {
   async createChat(req: Request, res: Response) {
     const chatId = uuid();
 
-    const { chatName } = req.body;
-
-    delete req.body.chatName;
-    const chatUsers = Object.values(req.body);
+    const { chatName } = req.body.data;
+    const { selectedFriend } = req.body.data;
 
     const chatsServices = new ChatsServices();
 
-    await chatsServices.createChat(chatId, chatUsers, chatName);
+    await chatsServices.createChat(chatId, selectedFriend, chatName);
 
     return res.json("Chat criado!");
   }

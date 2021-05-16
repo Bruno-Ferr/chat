@@ -5,11 +5,16 @@ import { ConversationContext } from '../../contexts/ConversationContext';
 import styles from './styles.module.scss';
 
 interface AllChatsProps {
-    message: AllChatsMessagesProps;
-    chatName: string; 
+    message?: AllChatsMessages;
+    chatUser: chatUsers; 
 }
 
-interface AllChatsMessagesProps {
+interface chatUsers {
+    chatName: string;
+    chatId: string;
+}
+
+interface AllChatsMessages {
     Id: number;
     chatId: string;
     Author: string;
@@ -34,12 +39,12 @@ export function SidebarChats() {
         <ul className={styles.sidebarChats}>
             {allChats.map(chat => {
                 return (
-                    <li key={chat.message.Id} className={styles.sidebarChat}>
-                        <a onClick={() => sawMessage(chat.message.chatId) }>
+                    <li key={chat.chatUser.chatId} className={styles.sidebarChat}>
+                        <a onClick={() => sawMessage(chat.chatUser.chatId) }>
                             <img src='' alt=""/>
                             <div>
-                                <h4>{chat.chatName}</h4>
-                                <p>{chat.message.messageBody}</p>
+                                <h4>{chat.chatUser.chatName}</h4>
+                                <p>{chat.message?.messageBody}</p>
                             </div>
                         </a>
                     </li>

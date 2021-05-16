@@ -13,7 +13,6 @@ async function getFriends(req: Request, res: Response) {
 async function addFriend(req: Request, res: Response) {
   const { email, userId, name } = req.body
 
-  console.log(email, userId)
 
   const isFriend = await knex('friends').where({
     Email: email, 
