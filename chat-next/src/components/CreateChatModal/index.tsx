@@ -6,15 +6,16 @@ import { BiCheckCircle, BiXCircle } from 'react-icons/bi';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../services/api';
+import { ConversationContext } from '../../contexts/ConversationContext';
 
 interface CreateChatModalProps {
   onRequestClose: () => void;
 }
 
 interface friend {
-  Id: number;
+  id: number;
   Email: string;
-  friendName: string;
+  friendname: string;
   userId: string;
 }
 
@@ -35,14 +36,10 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
   const [searchFriends, setSearchFriends] = useState<friend[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [chatName, setChatName] = useState('');
-
-  function handleChange(e) {
-    setInputValue(e.target.value);
-  }
  
   useEffect(() => {
     if(inputValue != ''){
-      const search = allFriends.filter(friend => friend.Email.toUpperCase().includes(inputValue.toUpperCase()) || friend.friendName.toUpperCase().includes(inputValue.toUpperCase()));
+      const search = allFriends.filter(friend => friend.Email.toUpperCase().includes(inputValue.toUpperCase()) || friend.friendname.toUpperCase().includes(inputValue.toUpperCase()));
       setSearchFriends(search);
     } else {
       setSearchFriends(allFriends);
@@ -75,7 +72,7 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
             <h3>Criar novo chat</h3>
           </div> 
           <div className={styles.createChatSend}>
-            <input type="text" name="Search" placeholder="Digite o nome de um amigo" onChange={(event) => handleChange(event)} />
+            <input type="text" name="Search" placeholder="Digite o nome de um amigo" onChange={(event) => setInputValue(event.target.value)} />
             <button type="button">
               <IoSearchOutline color="#919191" />
             </button>
@@ -85,9 +82,9 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
           {searchFriends.map(friend => {    // get all friends and check one by one
             if(selectedFriend.find(selectedEmail => friend.Email === selectedEmail)) {   // If find any friend selected where friend.email = selected.email   
               return (                                                                   // Return this friend with the deselect button
-                <li key={friend.Id} className={styles.sidebarChat}>
+                <li key={friend.id} className={styles.sidebarChat}>
                   <div>
-                    <h4>{friend.friendName}</h4>
+                    <h4>{friend.friendname}</h4>
                     <p>{friend.Email}</p>
                   </div>
                   <button type="button" onClick={() => handleDeselectFriend(friend.Email)}>
@@ -98,9 +95,9 @@ export function CreateChatModal({ onRequestClose }: CreateChatModalProps) {
 
             } else {
               return (
-                <li key={friend.Id} className={styles.sidebarChat}>
+                <li key={friend.id} className={styles.sidebarChat}>
                   <div>
-                    <h4>{friend.friendName}</h4>
+                    <h4>{friend.friendname}</h4>
                     <p>{friend.Email}</p>
                   </div>
                   <button type="button" onClick={() => handleSelectFriend(friend.Email)}>

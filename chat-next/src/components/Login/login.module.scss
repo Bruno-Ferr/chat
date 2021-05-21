@@ -2,7 +2,9 @@
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: var(--blue);
+    // background: url('../../../public/Background.svg');
+    // background-size: cover;
+    // background-position: bottom;
 
     .logo {
         display: flex;
@@ -37,7 +39,7 @@
         }
 
         .googleDescription {
-            background: none;
+            background: rgb(221, 221, 221);
             border-radius: 50px;
             padding: .5rem .75rem;
             display: flex;

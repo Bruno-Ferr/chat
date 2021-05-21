@@ -23,7 +23,7 @@ export function UserProvider({ children }: UserProviderProps) {
       if (res != null) {
         api.get(`usersLogIn/${res.user.email}`).then((dbRes) => {
           setUser({
-            Id: dbRes.data[0].Id,
+            Id: dbRes.data[0].id,
             Email: dbRes.data[0].Email,
             Name: res.user.name,
             Image: res.user.image

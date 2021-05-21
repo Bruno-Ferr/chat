@@ -25,7 +25,7 @@ export function Chats() {
     <main className={styles.chat}>
       <div className={styles.chatHeader}>
         <img src='' alt=""/>
-        <h4>{chatUsers.chatName}</h4>
+        <h4>{chatUsers.chatname}</h4>
       </div>
       <div className={styles.chatBody}>
         <ul>
@@ -38,7 +38,7 @@ export function Chats() {
                     <p>
                       {message.messageBody}
                     </p>
-                    <time>{message.sendedAt}</time>
+                    <time>{message.sendedat}</time>
                     <BiCheckDouble color="#f0f0f0"/>
                   </div>
                 </li>
@@ -48,7 +48,7 @@ export function Chats() {
                     <p>
                       {message.messageBody}
                     </p>
-                    <time>{message.sendedAt}</time>
+                    <time>{message.sendedat}</time>
                     <BiCheckDouble color="#0b8500"/>
                   </div>
                 </li>
@@ -59,7 +59,7 @@ export function Chats() {
                   <p>
                     {message.messageBody}
                   </p>
-                  <time>{message.sendedAt}</time>
+                  <time>{message.sendedat}</time>
                 </div>
               </li>
             )

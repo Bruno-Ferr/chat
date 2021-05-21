@@ -10,16 +10,16 @@ interface AllChatsProps {
 }
 
 interface chatUsers {
-    chatName: string;
+    chatname: string;
     chatId: string;
 }
 
 interface AllChatsMessages {
-    Id: number;
+    id: number;
     chatId: string;
-    Author: string;
+    author: string;
     messageBody: string;
-    sendedAt: Date; 
+    sendedat: Date; 
 }
 
 
@@ -43,7 +43,7 @@ export function SidebarChats() {
                         <a onClick={() => sawMessage(chat.chatUser.chatId) }>
                             <img src='' alt=""/>
                             <div>
-                                <h4>{chat.chatUser.chatName}</h4>
+                                <h4>{chat.chatUser.chatname}</h4>
                                 <p>{chat.message?.messageBody}</p>
                             </div>
                         </a>

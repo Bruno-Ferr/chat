@@ -17,10 +17,10 @@ async function createUserOnLogIn(req: Request, res: Response) {
     });
 
     const newUserSee = await knex('users').where('email', `${email}`);
-  
+    
     return res.json(newUserSee);
   } else {
-
+    
     return res.json(userExists);
   }
 }

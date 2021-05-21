@@ -10,16 +10,16 @@ interface ConversationProviderProps {
 }
 
 interface chatUsers {
-  chatName: string;
+  chatname: string;
   chatId: string;
 }
 
 interface messages {
-  Id: number;
+  id: number;
   chatId: string;
   author: string;
   messageBody: string;
-  sendedAt: string;
+  sendedat: string;
   seen: boolean;
 }
 
