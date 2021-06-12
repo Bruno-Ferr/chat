@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useContext } from 'react';
-import { Dashboard } from '../components/Dashboard';
+import { HomePage } from '../components/HomePage';
 import Login from '../components/Login';
 import { UserContext } from '../contexts/UserContext';
 
@@ -12,7 +12,7 @@ export default function Home() {
       <Head>
         <title>Chat</title>
       </Head>
-      {user.Id ? <Dashboard /> : <Login />}
+      {user.Id ? <HomePage /> : <Login />}
     </>
   ) 
 }

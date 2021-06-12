@@ -7,7 +7,6 @@ import { ConversationContext } from '../../contexts/ConversationContext';
 
 import styles from './styles.module.scss';
 
-
 export function Chats() {
   const user = useContext(UserContext);
   const { messages, chatUsers, sendMessage } = useContext(ConversationContext);

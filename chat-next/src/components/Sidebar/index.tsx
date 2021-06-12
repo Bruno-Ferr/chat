@@ -12,26 +12,10 @@ import styles from './styles.module.scss';
 import { AddFriendModal } from '../AddFriendModal';
 import { CreateChatModal } from '../CreateChatModal';
 
-export function SidebarHeader() {
+export function Sidebar() {
     const user = useContext(UserContext);
     const [isAddFriendModalOpen, setIsAddFriendModalOpen] = useState(false);
     const [isCreateChatModalOpen, setIsCreateChatModalOpen] = useState(false);
-
-    function handleOpenCreateChatModal() {
-        setIsCreateChatModalOpen(true);
-      }
-    
-      function handleCloseCreateChatModal() {
-        setIsCreateChatModalOpen(false);
-      }
-
-    function handleOpenAddFriendModal() {
-        setIsAddFriendModalOpen(true);
-    }
-
-    function handleCloseAddFriendModal() {
-        setIsAddFriendModalOpen(false);
-    }
 
     return (
         <aside className={styles.sidebar}>
@@ -45,16 +29,16 @@ export function SidebarHeader() {
 
             {isAddFriendModalOpen ?   
                 (   
-                    <AddFriendModal onRequestClose={handleCloseAddFriendModal} />
+                    <AddFriendModal onRequestClose={() => setIsAddFriendModalOpen(false)} />
                 ) : isCreateChatModalOpen ? (
-                    <CreateChatModal onRequestClose={handleCloseCreateChatModal} />
+                    <CreateChatModal onRequestClose={() => setIsCreateChatModalOpen(false)} />
                 ) : (
                     <>
                         <div className={styles.moreChats}>
-                            <button type="button" onClick={handleOpenAddFriendModal}>
+                            <button type="button" onClick={() => setIsAddFriendModalOpen(true)}>
                                 <IoPersonAddSharp color="#b6b6b6"/>
                             </button>
-                            <button type="button" onClick={handleOpenCreateChatModal}>
+                            <button type="button" onClick={() => setIsCreateChatModalOpen(true)}>
                                 <RiChatNewLine color="#b6b6b6"/>  
                             </button> 
                         </div>

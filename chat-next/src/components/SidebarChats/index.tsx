@@ -22,7 +22,6 @@ interface AllChatsMessages {
     sendedat: Date; 
 }
 
-
 export function SidebarChats() {
     const [allChats, setAllChats] = useState<AllChatsProps[]>([]);
     const { messages, sawMessage } = useContext(ConversationContext);
